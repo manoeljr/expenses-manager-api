@@ -4,6 +4,8 @@ import com.expensesmanager.domain.model.Customer;
 import com.expensesmanager.domain.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CustomerServiceImpl implements CustomerService {
 
@@ -15,32 +17,32 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer newCustomer) {
-        return null;
+        return repository.save(newCustomer);
     }
 
     @Override
     public Customer updateCustomer(Customer customer) {
-        return null;
+        return repository.save(customer);
     }
 
     @Override
-    public Customer deleteCustomer(Integer idCustomer) {
-        return null;
+    public void deleteCustomer(Integer idCustomer) {
+        repository.deleteById(idCustomer);
     }
 
     @Override
     public Customer getCustomer(Integer idCustomer) {
-        return null;
+        return repository.findById(idCustomer).orElse(null);
     }
 
     @Override
     public Customer getCustomerByName(String name) {
-        return null;
+        return repository.findCustomerByNameContainingIgnoreCase(name);
     }
 
     @Override
-    public Customer getCustomers() {
-        return null;
+    public List<Customer> getCustomers() {
+        return repository.findAll();
     }
 
 }

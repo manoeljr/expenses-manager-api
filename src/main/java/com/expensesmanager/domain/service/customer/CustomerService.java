@@ -2,11 +2,14 @@ package com.expensesmanager.domain.service.customer;
 
 import com.expensesmanager.domain.model.Customer;
 
+import java.util.List;
+
+
 public interface CustomerService {
     Customer createCustomer(Customer newCustomer);
     Customer updateCustomer(Customer customer);
-    Customer deleteCustomer(Integer idCustomer);
+    void deleteCustomer(Integer idCustomer);
     Customer getCustomer(Integer idCustomer);
     Customer getCustomerByName(String name);
-    Customer getCustomers();
+    List<Customer> getCustomers();
 }
