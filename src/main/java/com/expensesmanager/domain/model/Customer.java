@@ -1,10 +1,9 @@
 package com.expensesmanager.domain.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +13,9 @@ public class Customer {
     private Integer codCustomer;
     private String name;
     private String email;
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer")
+    private List<Product> products;
 
     public Integer getCodCustomer() {
         return codCustomer;
@@ -37,6 +39,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
