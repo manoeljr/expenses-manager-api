@@ -4,6 +4,10 @@ import com.expensesmanager.domain.model.Product;
 import com.expensesmanager.domain.repository.ProductRepository;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Component
 public class ProductServiceImpl implements ProductService {
 
@@ -15,31 +19,41 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(Product newProduct) {
-        return null;
+        return repository.save(newProduct);
     }
 
     @Override
     public Product updateProduct(Product product) {
-        return null;
+        return repository.save(product);
     }
 
     @Override
-    public Product deleteProduct(Integer idProduct) {
-        return null;
+    public void deleteProduct(Integer idProduct) {
+        repository.deleteById(idProduct);
     }
 
     @Override
     public Product getProduct(Integer idProduct) {
-        return null;
+        return repository.findById(idProduct).orElse(null);
     }
 
     @Override
     public Product getProductByName(String name) {
-        return null;
+        return repository.findByNameContaining(name);
     }
 
     @Override
-    public Product getProducts() {
-        return null;
+    public Product getProductByPrice(BigDecimal price) {
+        return repository.findByPrice(price);
+    }
+
+    @Override
+    public Product getProductByDate(LocalDateTime creationDate) {
+        return repository.findByCreationDate(creationDate);
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        return repository.findAll();
     }
 }

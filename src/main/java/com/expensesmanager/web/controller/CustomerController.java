@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/customers")
@@ -23,7 +24,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer newCustomer) {
         Customer customer = service.createCustomer(newCustomer);
-        return new ResponseEntity<>(customer, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(customer);
     }
 
     @PatchMapping("/{id}")
@@ -62,11 +63,7 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<List<Customer>> getCustomers() {
-        List<Customer> customers = service.getCustomers();
-        if (customers != null) {
-            return ResponseEntity.ok(customers);
-        }
-        return ResponseEntity.ok(new ArrayList<>());
+        return ResponseEntity.ok(Objects.requireNonNullElseGet(service.getCustomers(), ArrayList::new));
     }
 
 }
